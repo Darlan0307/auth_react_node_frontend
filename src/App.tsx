@@ -1,8 +1,10 @@
+import AppRouter from "./components/AppRouter"
+
 function App() {
 
   return (
     <>
-      <h1>teste</h1>
+      <AppRouter/>
     </>
   )
 }
