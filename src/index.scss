@@ -1,8 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,600&display=swap');
 
+$BackgroundPageTop: #202442;
+$BackgroundPageBottom: #353A61;
+$BackgroundElemet: #62678C;
+$text:#3CD27D;
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+}
+
+body{
+  min-height: 100vh;
+  background-color: $BackgroundPageTop;
 }
