@@ -1,13 +1,18 @@
 import { Link } from 'react-router-dom'
 import LayoutForms from '../../LayoutForms'
 import './styles.scss'
+import { MdEmail } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
+
 
 const Register = () => {
   return (
     <LayoutForms>
       <main className='page-register'>
-        <h1 className='title'>Sign Up</h1>
-        <p className='description'> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa, mollitia?</p>
+        <div className='apresentation'>
+          <h1 className='title'>Sign Up</h1>
+          <p className='description'>Faça login para ter acesso as nossas páginas e recursos.</p>
+        </div>
         <form className='form'>
           <div className='wrap-input'>
             <input 
@@ -15,7 +20,7 @@ const Register = () => {
             placeholder='Digite seu email...'
             className='input'
             />
-            <span>icon</span>
+            <span><MdEmail/></span>
           </div>
           <div className='wrap-input'>
             <input 
@@ -23,7 +28,7 @@ const Register = () => {
             placeholder='Crie uma senha...'
             className='input'
             />
-            <span>icon</span>
+            <span><RiLockPasswordFill/></span>
           </div>
           <div className='wrap-input'>
             <input 
@@ -31,9 +36,9 @@ const Register = () => {
             placeholder='Confirme a senha...'
             className='input'
             />
-            <span>icon</span>
+            <span><RiLockPasswordFill/></span>
           </div>
-          <button type='submit'>Register</button>
+          <button type='submit' className='button'>Register</button>
         </form>
         <p className='sugestao'>OU</p>
         <p className='content-link'>
