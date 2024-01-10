@@ -11,7 +11,7 @@ const Register = () => {
       <main className='page-register'>
         <div className='apresentation'>
           <h1 className='title'>Sign Up</h1>
-          <p className='description'>Faça login para ter acesso as nossas páginas e recursos.</p>
+          <p className='description'>Crie uma conta gratuitamente para ter acesso as nossas páginas.</p>
         </div>
         <form className='form'>
           <div className='wrap-input'>
