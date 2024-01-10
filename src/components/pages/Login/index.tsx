@@ -5,11 +5,18 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useRef } from 'react';
+import { FormEvent, useRef, useState } from 'react';
+import { UserType } from '../../../@Types/UserType';
+import { Validate } from '../../../utils/Validate';
 
 
 const Login = () => {
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+  const [isError,setIsError] = useState(false)
 
+
+  // Animate
   const container = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
@@ -39,6 +46,8 @@ const Login = () => {
               type="email" 
               placeholder='Digite o seu email...'
               className='input'
+              onChange={(e)=>setEmail(e.target.value)}
+              value={email}
               />
               <span><MdEmail/></span>
             </div>
@@ -47,6 +56,8 @@ const Login = () => {
               type="password" 
               placeholder='Digite a sua senha...'
               className='input'
+              onChange={(e)=>setPassword(e.target.value)}
+              value={password}
               />
               <span><RiLockPasswordFill/></span>
             </div>

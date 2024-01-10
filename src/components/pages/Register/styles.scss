@@ -32,27 +32,37 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5em;
+    gap: 2em;
 
     .wrap-input{
       position: relative;
       width: 100%;
       .input{
         width: 100%;
-        font-size: 16px;
+        font-size: 18px;
         padding: 8px  12px;
         background-color: #353A61;
-        border: none;
+        border: 0 solid transparent;
         border-radius: 15px;
         outline: none;
         color: #eaeaea;
         &::placeholder{
           color: #62678C;
         }
-        &:focus{
-          border: 2px solid #3CD27D;
+       
+      }
+
+      .error{
+        border: 2px solid lightcoral;
+
+        &+span{
+          svg{
+            fill: lightcoral;
+          }
         }
       }
+
+      
 
       span{
         position: absolute;
@@ -62,6 +72,13 @@
           fill: #3CD27D;
           font-size: 20px;
         }
+      }
+
+      .msg-error{
+        position: absolute;
+        bottom: -25px;
+        left: 15px;
+        color: lightcoral;
       }
     }
 
@@ -89,3 +106,4 @@
     }
   }
 }
+

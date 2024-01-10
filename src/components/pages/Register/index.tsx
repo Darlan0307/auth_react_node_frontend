@@ -5,11 +5,41 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useRef } from 'react';
+import { FormEvent, useRef, useState } from 'react';
+import { Validate } from '../../../utils/Validate';
+import { UserType } from '../../../@Types/UserType';
 
 const Register = () => {
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+  const [confirmPassword,setConfirmPassword] = useState('')
+  const [erros,setErros] = useState<UserType | null>(null)
 
-  const container = useRef<HTMLDivElement>(null)
+  const handleSubmit = (event:FormEvent) => {
+    event.preventDefault()
+    setErros(null)
+    const dataUser : UserType = {
+      email,
+      password,
+      confirmPassword
+    }
+
+    const objErros = Validate(dataUser)
+
+    if(Object.keys(objErros).length > 0){
+      setErros(objErros)
+      // Usar toastfy
+      return;
+    }
+
+    //  Enviar para o banco de dados
+    console.log(dataUser);
+    
+  }
+
+
+  // Animate 
+    const container = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
     // Estilo inicial
@@ -24,6 +54,8 @@ const Register = () => {
     });
   
   }, { scope: container });
+  
+  
 
   return (
     <LayoutForms>
@@ -32,30 +64,45 @@ const Register = () => {
           <h1 className='title'>Sign Up</h1>
           <p className='description'>Crie uma conta gratuitamente para ter acesso as nossas páginas.</p>
         </div>
-        <form className='form'>
+        <form className='form' onSubmit={handleSubmit}>
           <div className='wrap-input'>
             <input 
             type="email" 
             placeholder='Digite seu email...'
-            className='input'
+            className={erros?.email ? `input error` : `input`}
+            onChange={(e)=>setEmail(e.target.value)}
+            value={email}
             />
             <span><MdEmail/></span>
+            {erros?.email && (
+              <small className='msg-error'>{erros.email}</small>
+            )}
           </div>
           <div className='wrap-input'>
             <input 
             type="password" 
             placeholder='Crie uma senha...'
-            className='input'
+            className={erros?.password ? `input error` : `input`}
+            onChange={(e)=>setPassword(e.target.value)}
+            value={password}
             />
             <span><RiLockPasswordFill/></span>
+            {erros?.password && (
+              <small className='msg-error'>{erros.password}</small>
+            )}
           </div>
           <div className='wrap-input'>
             <input 
             type="password" 
             placeholder='Confirme a senha...'
-            className='input'
+            className={erros?.confirmPassword ? `input error` : `input`}
+            onChange={(e)=>setConfirmPassword(e.target.value)}
+            value={confirmPassword}
             />
             <span><RiLockPasswordFill/></span>
+            {erros?.confirmPassword && (
+              <small className='msg-error'>{erros.confirmPassword}</small>
+            )}
           </div>
           <button type='submit' className='button'>Register</button>
         </form>
