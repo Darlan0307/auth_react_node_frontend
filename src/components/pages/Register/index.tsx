@@ -3,12 +3,31 @@ import LayoutForms from '../../LayoutForms'
 import './styles.scss'
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useRef } from 'react';
 
 const Register = () => {
+
+  const container = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    // Estilo inicial
+    gsap.fromTo(container.current, {
+      opacity: 0,
+      x:-300
+    },{ // Estilo final
+      opacity:1,
+      x:0,
+      ease: "back.inOut",
+      duration: .5
+    });
+  
+  }, { scope: container });
+
   return (
     <LayoutForms>
-      <main className='page-register'>
+      <main className='page-register' ref={container}>
         <div className='apresentation'>
           <h1 className='title'>Sign Up</h1>
           <p className='description'>Crie uma conta gratuitamente para ter acesso as nossas páginas.</p>
