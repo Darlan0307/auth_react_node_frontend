@@ -25,7 +25,7 @@ const Register = () => {
 
       toast.success("Usuário criado com sucesso!")
       setErros(null)
-      navigate("/login")
+      navigate("/")
     } catch (error) {
 
       if(error.response.status == 401){
@@ -54,7 +54,6 @@ const Register = () => {
 
     //  Enviar para o banco de dados
     sendUserApi(dataUser)
-    setErros({email:"Tente outro email"})
   }
 
 
@@ -128,7 +127,7 @@ const Register = () => {
         </form>
         <p className='sugestao'>OU</p>
         <p className='content-link'>
-          Ja tem uma conta? <Link to="/login" className='link'>Faça login</Link>
+          Ja tem uma conta? <Link to="/" className='link'>Faça login</Link>
         </p>
       </main>
     </LayoutForms>

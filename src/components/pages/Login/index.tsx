@@ -1,19 +1,23 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import LayoutForms from '../../LayoutForms'
 import './styles.scss'
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { useRef, useState } from 'react';
-
+import { FormEvent, useRef, useState } from 'react';
+import { useAuth } from '../../../context/AuthContext';
 
 
 const Login = () => {
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
-  const [isError,setIsError] = useState(false)
+  const {signIn,signed} = useAuth()
 
+  const handleSubmit = async(event:FormEvent) => {
+    event.preventDefault();    
+      await signIn(email,password)  
+  }
 
   // Animate
   const container = useRef<HTMLDivElement>(null)
@@ -32,14 +36,15 @@ const Login = () => {
   
   }, { scope: container });
 
-  return (
-    <LayoutForms>
+  if(!signed){
+    return (
+      <LayoutForms>
         <main className='page-login' ref={container}>
           <div className='apresentation'>
             <h1 className='title'>Sign In</h1>
             <p className='description'>Faça login para ter acesso aos nossos serviços e recursos.</p>
           </div>
-          <form className='form'>
+          <form className='form' onSubmit={handleSubmit}>
             <div className='wrap-input'>
               <input 
               type="email" 
@@ -68,7 +73,10 @@ const Login = () => {
           </p>
         </main>
     </LayoutForms>
-  )
+    )
+  }else{
+    return <Navigate to="/home"/>
+  }
 }
 
 export default Login

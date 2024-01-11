@@ -1,6 +1,8 @@
 .page-home{
   background-color: #62678C;
-  // background-color: #353A61;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
   max-width: 1000px;
   width: 90%;
   padding: 20px;
@@ -9,7 +11,6 @@
   h1{
     color: #eaeaea;
     text-align: center;
-    margin-bottom: 1em;
   }
   .config{
     display: flex;
@@ -54,6 +55,50 @@
 
       .signout{
         background-color: lightcoral;
+      }
+    }
+  }
+
+  .qtdUsers{
+    margin-top: 1em;
+    h3{
+      text-align: center;
+      color: #eaeaea;
+      font-weight: bold;
+      font-size: 1.5em;
+    }
+  }
+
+  .container-users{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
+    align-items: baseline;
+    background-color: #353A61;
+    padding: 15px;
+    border-radius: 20px;
+
+    .card-user{
+      width: 300px;
+      min-height: 80px;
+      h3{
+        color: #eaeaea;
+        span{
+          color: #3CD27D;
+          padding-right: 10px;
+        }
+      }
+
+      p{
+        
+        color: #eaeaea;
+        font-weight: bold;
+        font-size: 1.1em;
+        span{
+          color: #3CD27D;
+          padding-right: 10px;
+        }
       }
     }
   }
