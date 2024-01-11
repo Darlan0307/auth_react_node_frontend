@@ -10,6 +10,7 @@ import { Validate } from '../../../utils/Validate';
 import { UserType } from '../../../@Types/UserType';
 import { api } from '../../../services/api';
 import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 
 const Register = () => {
   const [email,setEmail] = useState('')
@@ -28,10 +29,9 @@ const Register = () => {
       navigate("/")
     } catch (error) {
 
-      if(error.response.status == 401){
-        toast.error(error.response.data.message)
-        
-      }
+      if (error instanceof AxiosError && error.response?.data.message) {
+        toast.error(error.response.data.message);
+     }
     }
   }
 

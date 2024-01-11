@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { ContextValues, UserType } from "../@Types/UserType";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
-
+import { AxiosError } from "axios";
 
 export const AuthContext = createContext({} as ContextValues)
 
@@ -43,9 +43,9 @@ export const AuthProvider = ({children}:ProviderProps) => {
 
         toast.success("Logado com sucesso!")
       } catch (error) {
-        if(error.response.status == 401){
-          toast.error(error.response.data.message)
-        }
+        if (error instanceof AxiosError && error.response?.data.message) {
+          toast.error(error.response.data.message);
+       }
       }
     }
 
