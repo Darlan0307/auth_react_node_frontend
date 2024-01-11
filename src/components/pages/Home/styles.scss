@@ -1,0 +1,60 @@
+.page-home{
+  background-color: #62678C;
+  // background-color: #353A61;
+  max-width: 1000px;
+  width: 90%;
+  padding: 20px;
+  margin: 3em auto;
+  border-radius: 20px;
+  h1{
+    color: #eaeaea;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .config{
+    display: flex;
+    justify-content: center;
+    gap: 3em;
+    flex-wrap: wrap;
+
+    .option{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1em;
+      width: 300px;
+      min-height: 100px;
+
+      h3{
+        text-align: center;
+        color: #eaeaea;
+      }
+
+      button{
+        width: 220px;
+        font-size: 20px;
+        border: none;
+        border-radius: 15px;
+        padding: 4px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+        transition: all .6s;
+
+        &:hover{
+          transform: scale(1.1);
+        }
+      }
+
+      .lister{
+        background-color: #3CD27D;
+        
+      }
+
+      .signout{
+        background-color: lightcoral;
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import LayoutForms from '../../LayoutForms'
 import './styles.scss'
 import { MdEmail } from "react-icons/md";
@@ -8,12 +8,32 @@ import { useGSAP } from '@gsap/react';
 import { FormEvent, useRef, useState } from 'react';
 import { Validate } from '../../../utils/Validate';
 import { UserType } from '../../../@Types/UserType';
+import { api } from '../../../services/api';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
   const [confirmPassword,setConfirmPassword] = useState('')
   const [erros,setErros] = useState<UserType | null>(null)
+  const navigate = useNavigate()
+
+
+  const sendUserApi = async({email,password}:UserType) =>{
+    try {
+      await api.post("/create",{email,password})
+
+      toast.success("Usuário criado com sucesso!")
+      setErros(null)
+      navigate("/login")
+    } catch (error) {
+
+      if(error.response.status == 401){
+        toast.error(error.response.data.message)
+        
+      }
+    }
+  }
 
   const handleSubmit = (event:FormEvent) => {
     event.preventDefault()
@@ -28,13 +48,13 @@ const Register = () => {
 
     if(Object.keys(objErros).length > 0){
       setErros(objErros)
-      // Usar toastfy
+      toast.error("Preencha os campos corretamente.")
       return;
     }
 
     //  Enviar para o banco de dados
-    console.log(dataUser);
-    
+    sendUserApi(dataUser)
+    setErros({email:"Tente outro email"})
   }
 
 

@@ -5,9 +5,8 @@ import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { FormEvent, useRef, useState } from 'react';
-import { UserType } from '../../../@Types/UserType';
-import { Validate } from '../../../utils/Validate';
+import { useRef, useState } from 'react';
+
 
 
 const Login = () => {
@@ -65,7 +64,7 @@ const Login = () => {
           </form>
           <p className='sugestao'>OU</p>
           <p className='content-link'>
-            Não tem uma conta? <Link to="/" className='link'>Crie agora!</Link>
+            Não tem uma conta? <Link to="/register" className='link'>Crie agora!</Link>
           </p>
         </main>
     </LayoutForms>
