@@ -11,6 +11,7 @@ import { UserType } from '../../../@Types/UserType';
 import { api } from '../../../services/api';
 import { toast } from 'react-toastify';
 import { AxiosError } from 'axios';
+import { useAuth } from '../../../context/AuthContext';
 
 const Register = () => {
   const [email,setEmail] = useState('')
@@ -18,9 +19,10 @@ const Register = () => {
   const [confirmPassword,setConfirmPassword] = useState('')
   const [erros,setErros] = useState<UserType | null>(null)
   const navigate = useNavigate()
-
+  const {setLoader} = useAuth()
 
   const sendUserApi = async({email,password}:UserType) =>{
+    setLoader(true)
     try {
       await api.post("/create",{email,password})
 
@@ -32,6 +34,10 @@ const Register = () => {
       if (error instanceof AxiosError && error.response?.data.message) {
         toast.error(error.response.data.message);
      }
+    }finally{
+      setTimeout(()=>{
+        setLoader(false)
+      },1000)
     }
   }
 

@@ -11,4 +11,6 @@ export type ContextValues = {
   signIn:(email:string,password:string) => Promise<void>,
   signOut:()=>void,
   signed:boolean,
+  loader:boolean,
+  setLoader:(value:boolean)=>void
 }

@@ -13,7 +13,7 @@ type ProviderProps = {
 export const AuthProvider = ({children}:ProviderProps) => {
 
     const [user,setUser] = useState<UserType | null | string>(null)
-
+    const [loader,setLoader] = useState(false)
 
     useEffect(() => {
       const loadingStoreData = () => {
@@ -28,7 +28,9 @@ export const AuthProvider = ({children}:ProviderProps) => {
     }, []);
 
 
+
     const signIn = async(email:string,password:string) => {
+      setLoader(true)
       try {
         const response = await api.post("/auth",{email,password})
 
@@ -46,6 +48,10 @@ export const AuthProvider = ({children}:ProviderProps) => {
         if (error instanceof AxiosError && error.response?.data.message) {
           toast.error(error.response.data.message);
        }
+      }finally{
+        setTimeout(()=>{
+          setLoader(false)
+        },1000)
       }
     }
 
@@ -60,7 +66,9 @@ export const AuthProvider = ({children}:ProviderProps) => {
       user,
       signIn,
       signed: !!user,
-      signOut
+      signOut,
+      loader,
+      setLoader
     }}>
       {children}
     </AuthContext.Provider>

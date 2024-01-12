@@ -7,9 +7,10 @@ import { UserType } from '../../../@Types/UserType'
 
 const Home = () => {
   const [users,setUsers] = useState<UserType[] | null>(null)
-  const {signOut} = useAuth()
+  const {signOut,setLoader} = useAuth()
 
   const listerUsers = async() => {
+    setLoader(true)
     try {
       const response = await api.get("/users")
 
@@ -18,6 +19,10 @@ const Home = () => {
     } catch (error) {
       toast.warn("Não foi possivel acessar o banco de dados")
       toast.warn("tente sair da conta e entrar de novo")
+    }finally{
+      setTimeout(()=>{
+        setLoader(false)
+      },1000)
     }
   }
 
